@@ -110,7 +110,7 @@ import:
   subpackages:
   - lib
 - package: github.com/IBM/ubiquity
-  version: fix/UB-1103_ds8k_storwize_lun0_rescan
+  version: d28f473b4c2ecbd2ff43ce743a6b35872f1f371a
   subpackages:
   - remote
   - resources
