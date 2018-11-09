@@ -51,7 +51,7 @@ spectrumConnect:
         ## Parameters to create the first Storage Class that also be used by ubiquity for ibm-ubiquity-db PVC.
         storageClassName:
 		
-		## Set this param with an existing storageclass object if one exist.
+        ## Set this param with an existing storageclass object if one exist.
         # existingStorageClass:
 		
         params:
@@ -59,6 +59,9 @@ spectrumConnect:
           spectrumConnectServiceName:
           ## Storage Class file-system type, Allowed values: ext4 or xfs.
           fsType: ext4
+
+      ## Allowed values: true or false. Set to true if the ubiquity database PV exists. Default value is false.
+      doesUbiquityDbPvcExist: false
 
 genericConfig:
   ## The IP address of the ubiquity service object.
