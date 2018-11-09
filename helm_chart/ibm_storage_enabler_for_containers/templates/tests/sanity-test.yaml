@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: {{ .Release.Name }}-sanity-test
+  annotations:
+    "helm.sh/hook": test-success
+spec:
+  containers:
+    - name: sanity-test
+      image: byrnedo/alpine-curl
+      volumeMounts:
+        - name: sanity-script
+          mountPath: /var/tmp/config/sanity
+        - name: sanity-pod
+          mountPath: /var/tmp/config/sanity/pod
+        - name: sanity-pvc
+          mountPath: /var/tmp/config/sanity/pvc
+      command: ["/bin/sh"]
+      args: ["-c", "/var/tmp/config/sanity/sanity-test.sh"]
+  volumes:
+    - name: sanity-script
+      configMap:
+        name: hook-config
+        defaultMode: 0777
+        items:
+          - key: sanity-test
+            path: sanity-test.sh
+    - name: sanity-pod
+      configMap:
+        name: sanity-config
+        defaultMode: 0777
+        items:
+          - key: sanity-pod
+            path: sanity-pod.json
+    - name: sanity-pvc
+      configMap:
+        name: sanity-config
+        defaultMode: 0777
+        items:
+          - key: sanity-pvc
+            path: sanity-pvc.json
+  restartPolicy: Never
+  serviceAccount: ubiquity-helm-hook
