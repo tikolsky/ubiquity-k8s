@@ -8,7 +8,7 @@ spec:
   containers:
     - name: sanity-test
       image: {{ .Values.images.hookexecutor }}
-      command: ["/root/hook-executor"]
+      command: ["/usr/bin/hook-executor"]
       args: ["sanity"]
       env:
         - name: NAMESPACE
